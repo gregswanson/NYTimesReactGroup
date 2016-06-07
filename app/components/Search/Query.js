@@ -2,6 +2,25 @@ var React = require('react');
 
 // Here we create a component to hold the repos informatino
 var Query = React.createClass({
+	getInitialState: function() {
+    return {author: '', text: ''};
+	  },
+	  handleAuthorChange: function(e) {
+	    this.setState({author: e.target.value});
+	  },
+	  handleTextChange: function(e) {
+	    this.setState({text: e.target.value});
+	  },
+	  handleSubmit: function(e) {
+	    e.preventDefault();
+	    var author = this.state.author.trim();
+	    var text = this.state.text.trim();
+	    if (!text || !author) {
+	      return;
+	    }
+	    // TODO: send request to the server
+	    this.setState({author: '', text: ''});
+  },
 	render: function(){
 
 		// console log the query

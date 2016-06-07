@@ -24811,91 +24811,110 @@
 /* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var React = __webpack_require__(1);
 
 	// Here we create a component to hold the repos informatino
 	var Query = React.createClass({
-		displayName: "Query",
+		displayName: 'Query',
 
+		getInitialState: function getInitialState() {
+			return { author: '', text: '' };
+		},
+		handleAuthorChange: function handleAuthorChange(e) {
+			this.setState({ author: e.target.value });
+		},
+		handleTextChange: function handleTextChange(e) {
+			this.setState({ text: e.target.value });
+		},
+		handleSubmit: function handleSubmit(e) {
+			e.preventDefault();
+			var author = this.state.author.trim();
+			var text = this.state.text.trim();
+			if (!text || !author) {
+				return;
+			}
+			// TODO: send request to the server
+			this.setState({ author: '', text: '' });
+		},
 		render: function render() {
 
 			// console log the query
 			console.log("Query", this.props.repos);
 			return React.createElement(
-				"div",
-				{ className: "row" },
+				'div',
+				{ className: 'row' },
 				React.createElement(
-					"div",
-					{ className: "col-lg-12" },
+					'div',
+					{ className: 'col-lg-12' },
 					React.createElement(
-						"div",
-						{ className: "panel panel-primary" },
+						'div',
+						{ className: 'panel panel-primary' },
 						React.createElement(
-							"div",
-							{ className: "panel-heading" },
+							'div',
+							{ className: 'panel-heading' },
 							React.createElement(
-								"h1",
-								{ className: "panel-title" },
+								'h1',
+								{ className: 'panel-title' },
 								React.createElement(
-									"strong",
+									'strong',
 									null,
-									React.createElement("i", { "class": "fa fa-newspaper-o", "aria-hidden": "true" }),
-									"  Query"
+									React.createElement('i', { 'class': 'fa fa-newspaper-o', 'aria-hidden': 'true' }),
+									'  Query'
 								)
 							)
 						),
 						React.createElement(
-							"div",
-							{ className: "panel-body" },
+							'div',
+							{ className: 'panel-body' },
 							React.createElement(
-								"form",
+								'form',
 								null,
 								React.createElement(
-									"div",
-									{ className: "form-group" },
+									'div',
+									{ className: 'form-group' },
 									React.createElement(
-										"h4",
-										{ className: "" },
+										'h4',
+										{ className: '' },
 										React.createElement(
-											"strong",
+											'strong',
 											null,
-											"Topic"
+											'Topic'
 										)
 									),
-									React.createElement("input", { type: "text", className: "form-control ", id: "search_topic" }),
+									React.createElement('input', { type: 'text', className: 'form-control ', id: 'search_topic' }),
 									React.createElement(
-										"h4",
-										{ className: "" },
+										'h4',
+										{ className: '' },
 										React.createElement(
-											"strong",
+											'strong',
 											null,
-											"Start Year"
+											'Start Year'
 										)
 									),
-									React.createElement("input", { type: "text", className: "form-control ", id: "search_start" }),
+									React.createElement('input', { type: 'text', className: 'form-control ', id: 'search_start' }),
 									React.createElement(
-										"h4",
-										{ className: "" },
+										'h4',
+										{ className: '' },
 										React.createElement(
-											"strong",
+											'strong',
 											null,
-											"End Year"
+											'End Year'
 										)
 									),
-									React.createElement("input", { type: "text", className: "form-control ", id: "search_end" })
+									React.createElement('input', { type: 'text', className: 'form-control ', id: 'search_end' })
 								),
 								React.createElement(
-									"div",
-									{ className: "pull-right" },
+									'div',
+									{ className: 'pull-right' },
 									React.createElement(
-										"button",
-										{ type: "submit", className: "btn btn-danger" },
+										'button',
+										{ type: 'submit', className: 'btn btn-danger' },
 										React.createElement(
-											"h4",
+											'h4',
 											null,
-											"Submit"
+											'Submit'
 										)
 									)
 								)
