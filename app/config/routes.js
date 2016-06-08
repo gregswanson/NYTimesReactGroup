@@ -3,8 +3,9 @@ var React = require('react');
 // This will draw from each of the components
 var Main = require('../components/Main');
 var Home = require('../components/Home');
+var Search = require('../components/Search');
 var Saved = require('../components/Search/Saved.js');
-var Query = require('../components/Search/Query.js');
+//var Query = require('../components/Search/Query.js');
 /*Note how we include the Profile component as a route. 
 We don't need to include the sub components like Repos or User Profile
 These are already included here.
@@ -31,10 +32,10 @@ module.exports = (
 	
 		{/* If user selects the profile path... we get the Profile component*/}
 		<Route path='/saved' component={Saved} />
-		<Route path='/search' component={Query} />
+		<Route path='/search' component={Search} />
 
 		{/*If user selects any other path... we get the Home Route*/}
-		<IndexRoute component={Home} />
+		<IndexRoute component={Search} />
 	</Route>
 
 );

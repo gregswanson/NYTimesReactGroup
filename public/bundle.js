@@ -24332,8 +24332,9 @@
 	// This will draw from each of the components
 	var Main = __webpack_require__(207);
 	var Home = __webpack_require__(208);
-	var Saved = __webpack_require__(209);
-	var Query = __webpack_require__(210);
+	var Search = __webpack_require__(209);
+	var Saved = __webpack_require__(210);
+	//var Query = require('../components/Search/Query.js');
 	/*Note how we include the Profile component as a route. 
 	We don't need to include the sub components like Repos or User Profile
 	These are already included here.
@@ -24351,8 +24352,8 @@
 		Route,
 		{ path: '/', component: Main },
 		React.createElement(Route, { path: '/saved', component: Saved }),
-		React.createElement(Route, { path: '/search', component: Query }),
-		React.createElement(IndexRoute, { component: Home })
+		React.createElement(Route, { path: '/search', component: Search }),
+		React.createElement(IndexRoute, { component: Search })
 	);
 
 /***/ },
@@ -24574,6 +24575,43 @@
 
 /***/ },
 /* 209 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var Query = __webpack_require__(211);
+	var Results = __webpack_require__(212);
+
+	// This creates a React Component for us.
+	// It takes in a few properties that we can pass in...
+	// One of which is render. Render specifies what the UI looks like for this component
+	var Search = React.createClass({
+		displayName: 'Search',
+
+		render: function render() {
+
+			// Return and parenthesis needs to be on same line.
+			/*this.props.children will get replaced by the active component which will be our home component*/
+			/*This is because the "home.js" file is inside of the main component*/
+
+			return React.createElement(
+				'div',
+				null,
+				React.createElement(Query, null),
+				React.createElement(Results, null)
+			);
+		}
+	});
+
+	// Tell it which component to render and where we will render it to.
+	// Then we run webpack -w
+	// We dont want Main being the central render
+	// Whenever we require Main we'll get this component
+	module.exports = Search;
+
+/***/ },
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -24808,7 +24846,7 @@
 	module.exports = Saved;
 
 /***/ },
-/* 210 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24928,6 +24966,58 @@
 
 	/*We then export the Repos component*/
 	module.exports = Query;
+
+/***/ },
+/* 212 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	// Here we create a component for UserProfile
+	var Results = React.createClass({
+		displayName: "Results",
+
+		render: function render() {
+			// Console.log the bio object
+			console.log("Search", this.props.bio);
+			return React.createElement(
+				"div",
+				{ className: "row" },
+				React.createElement(
+					"div",
+					{ className: "col-lg-12" },
+					React.createElement(
+						"div",
+						{ className: "panel panel-primary" },
+						React.createElement(
+							"div",
+							{ className: "panel-heading" },
+							React.createElement(
+								"h1",
+								{ className: "panel-title" },
+								React.createElement(
+									"strong",
+									null,
+									React.createElement("i", { "class": "fa fa-list-alt" }),
+									"  Results"
+								)
+							)
+						),
+						React.createElement(
+							"div",
+							{ className: "panel-body" },
+							React.createElement("ul", { className: "list-group" })
+						)
+					)
+				)
+			);
+		}
+	});
+
+	/*We then export the UserProfile component*/
+	module.exports = Results;
 
 /***/ }
 /******/ ]);
