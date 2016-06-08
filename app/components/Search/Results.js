@@ -16,7 +16,7 @@ var Results = React.createClass({
 					</div>
 					<div className="panel-body">
 						<ul className="list-group">
-						<li className="list-group-item">{this.props.data.text}</li>
+						<li className="list-group-item">{this.props.data}</li>
 						 	  
 						</ul>					
 					</div>

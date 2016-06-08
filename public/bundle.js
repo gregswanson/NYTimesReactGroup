@@ -24333,7 +24333,7 @@
 	var Main = __webpack_require__(207);
 	var Home = __webpack_require__(208);
 	var Search = __webpack_require__(209);
-	var Saved = __webpack_require__(212);
+	var Saved = __webpack_require__(210);
 	//var Query = require('../components/Search/Query.js');
 	/*Note how we include the Profile component as a route. 
 	We don't need to include the sub components like Repos or User Profile
@@ -24580,8 +24580,9 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var Query = __webpack_require__(210);
-	var Results = __webpack_require__(211);
+	var Query = __webpack_require__(211);
+	var Results = __webpack_require__(212);
+	var axios = __webpack_require__(214);
 	var helpers = __webpack_require__(213);
 
 	// This creates a React Component for us.
@@ -24595,8 +24596,17 @@
 			return { text: "Search to find the results" };
 		},
 
-		update: function update() {
-			this.setState(helpers.handleSubmit);
+		componentDidMount: function componentDidMount() {
+			console.log("MOUNTED", helpers.text);
+			// helpers.getGithubInfo(this.props.params.username)
+			// 	.then(function(data){
+			// 		this.setState({
+			// 			bio: data.bio,
+			// 			repos: data.repos
+			// 		})
+			// 	// This bind function allows us to reference the higher level this
+			// 	// and not the "this" in the smaller context function.
+			// 	}.bind(this))
 		},
 
 		render: function render() {
@@ -24609,7 +24619,7 @@
 				'div',
 				null,
 				React.createElement(Query, null),
-				React.createElement(Results, { data: this.update })
+				React.createElement(Results, { data: this.state.text })
 			);
 		}
 	});
@@ -24622,192 +24632,6 @@
 
 /***/ },
 /* 210 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-
-	var helpers = __webpack_require__(213);
-
-	// Here we create a component to hold the repos informatino
-	var Query = React.createClass({
-		displayName: 'Query',
-
-		getInitialState: function getInitialState() {
-			return { author: '', text: '' };
-		},
-		searchFunc: function searchFunc(e) {
-			e.preventDefault();
-			var searchData = {};
-			var topic = this.refs.topic.value;
-			var start = this.refs.start.value;
-			var end = this.refs.end.value;
-			var searchData = {
-				topic: topic,
-				start: start,
-				end: end
-			};
-
-			helpers.handleSubmit(searchData);
-			// var start = this.state.text.trim();
-			// var send = this.state.text.trim();
-			// 	console.log(searchData);
-			return;
-		},
-		render: function render() {
-
-			// console log the query
-			console.log("Query", this.props);
-			return React.createElement(
-				'div',
-				{ className: 'row' },
-				React.createElement(
-					'div',
-					{ className: 'col-lg-12' },
-					React.createElement(
-						'div',
-						{ className: 'panel panel-primary' },
-						React.createElement(
-							'div',
-							{ className: 'panel-heading' },
-							React.createElement(
-								'h1',
-								{ className: 'panel-title' },
-								React.createElement(
-									'strong',
-									null,
-									React.createElement('i', { 'class': 'fa fa-newspaper-o', 'aria-hidden': 'true' }),
-									'  Query'
-								)
-							)
-						),
-						React.createElement(
-							'div',
-							{ className: 'panel-body' },
-							React.createElement(
-								'form',
-								null,
-								React.createElement(
-									'div',
-									{ className: 'form-group' },
-									React.createElement(
-										'h4',
-										{ className: '' },
-										React.createElement(
-											'strong',
-											null,
-											'Topic'
-										)
-									),
-									React.createElement('input', { type: 'text', className: 'form-control ', id: 'search_topic', ref: 'topic' }),
-									React.createElement(
-										'h4',
-										{ className: '' },
-										React.createElement(
-											'strong',
-											null,
-											'Start Year'
-										)
-									),
-									React.createElement('input', { type: 'text', className: 'form-control ', id: 'search_start', ref: 'start' }),
-									React.createElement(
-										'h4',
-										{ className: '' },
-										React.createElement(
-											'strong',
-											null,
-											'End Year'
-										)
-									),
-									React.createElement('input', { type: 'text', className: 'form-control ', id: 'search_end', ref: 'end' })
-								),
-								React.createElement(
-									'div',
-									{ className: 'pull-right' },
-									React.createElement(
-										'button',
-										{ type: 'submit', className: 'btn btn-danger', onClick: this.searchFunc },
-										React.createElement(
-											'h4',
-											null,
-											'Submit'
-										)
-									)
-								)
-							)
-						)
-					)
-				)
-			);
-		}
-	});
-
-	/*We then export the Repos component*/
-	module.exports = Query;
-
-/***/ },
-/* 211 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	var React = __webpack_require__(1);
-
-	// Here we create a component for UserProfile
-	var Results = React.createClass({
-		displayName: "Results",
-
-		render: function render() {
-			// Console.log the bio object
-			console.log("Results", this.props);
-			return React.createElement(
-				"div",
-				{ className: "row" },
-				React.createElement(
-					"div",
-					{ className: "col-lg-12" },
-					React.createElement(
-						"div",
-						{ className: "panel panel-primary" },
-						React.createElement(
-							"div",
-							{ className: "panel-heading" },
-							React.createElement(
-								"h1",
-								{ className: "panel-title" },
-								React.createElement(
-									"strong",
-									null,
-									React.createElement("i", { "class": "fa fa-list-alt" }),
-									"  Results"
-								)
-							)
-						),
-						React.createElement(
-							"div",
-							{ className: "panel-body" },
-							React.createElement(
-								"ul",
-								{ className: "list-group" },
-								React.createElement(
-									"li",
-									{ className: "list-group-item" },
-									this.props.data.text
-								)
-							)
-						)
-					)
-				)
-			);
-		}
-	});
-
-	/*We then export the UserProfile component*/
-	module.exports = Results;
-
-/***/ },
-/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25042,6 +24866,194 @@
 	module.exports = Saved;
 
 /***/ },
+/* 211 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var helpers = __webpack_require__(213);
+	var Search = __webpack_require__(209);
+
+	// Here we create a component to hold the repos informatino
+	var Query = React.createClass({
+		displayName: 'Query',
+
+		// getInitialState: function() {
+		//    return {author: '', text: ''};
+		//   },
+
+		searchFunc: function searchFunc(e) {
+			e.preventDefault();
+			var searchData = {};
+			var topic = this.refs.topic.value;
+			var start = this.refs.start.value;
+			var end = this.refs.end.value;
+			var searchData = {
+				topic: topic,
+				start: start,
+				end: end
+			};
+
+			helpers.handleSubmit(searchData);
+			// var start = this.state.text.trim();
+			// var send = this.state.text.trim();
+			// 	console.log(searchData);
+			return;
+		},
+		render: function render() {
+
+			// console log the query
+			console.log("Query", this.props);
+			return React.createElement(
+				'div',
+				{ className: 'row' },
+				React.createElement(
+					'div',
+					{ className: 'col-lg-12' },
+					React.createElement(
+						'div',
+						{ className: 'panel panel-primary' },
+						React.createElement(
+							'div',
+							{ className: 'panel-heading' },
+							React.createElement(
+								'h1',
+								{ className: 'panel-title' },
+								React.createElement(
+									'strong',
+									null,
+									React.createElement('i', { 'class': 'fa fa-newspaper-o', 'aria-hidden': 'true' }),
+									'  Query'
+								)
+							)
+						),
+						React.createElement(
+							'div',
+							{ className: 'panel-body' },
+							React.createElement(
+								'form',
+								null,
+								React.createElement(
+									'div',
+									{ className: 'form-group' },
+									React.createElement(
+										'h4',
+										{ className: '' },
+										React.createElement(
+											'strong',
+											null,
+											'Topic'
+										)
+									),
+									React.createElement('input', { type: 'text', className: 'form-control ', id: 'search_topic', ref: 'topic' }),
+									React.createElement(
+										'h4',
+										{ className: '' },
+										React.createElement(
+											'strong',
+											null,
+											'Start Year'
+										)
+									),
+									React.createElement('input', { type: 'text', className: 'form-control ', id: 'search_start', ref: 'start' }),
+									React.createElement(
+										'h4',
+										{ className: '' },
+										React.createElement(
+											'strong',
+											null,
+											'End Year'
+										)
+									),
+									React.createElement('input', { type: 'text', className: 'form-control ', id: 'search_end', ref: 'end' })
+								),
+								React.createElement(
+									'div',
+									{ className: 'pull-right' },
+									React.createElement(
+										'button',
+										{ type: 'submit', className: 'btn btn-danger', onClick: this.searchFunc },
+										React.createElement(
+											'h4',
+											null,
+											'Submit'
+										)
+									)
+								)
+							)
+						)
+					)
+				)
+			);
+		}
+	});
+
+	/*We then export the Repos component*/
+	module.exports = Query;
+
+/***/ },
+/* 212 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	// Here we create a component for UserProfile
+	var Results = React.createClass({
+		displayName: "Results",
+
+		render: function render() {
+			// Console.log the bio object
+			console.log("Results", this.props);
+			return React.createElement(
+				"div",
+				{ className: "row" },
+				React.createElement(
+					"div",
+					{ className: "col-lg-12" },
+					React.createElement(
+						"div",
+						{ className: "panel panel-primary" },
+						React.createElement(
+							"div",
+							{ className: "panel-heading" },
+							React.createElement(
+								"h1",
+								{ className: "panel-title" },
+								React.createElement(
+									"strong",
+									null,
+									React.createElement("i", { "class": "fa fa-list-alt" }),
+									"  Results"
+								)
+							)
+						),
+						React.createElement(
+							"div",
+							{ className: "panel-body" },
+							React.createElement(
+								"ul",
+								{ className: "list-group" },
+								React.createElement(
+									"li",
+									{ className: "list-group-item" },
+									this.props.data
+								)
+							)
+						)
+					)
+				)
+			);
+		}
+	});
+
+	/*We then export the UserProfile component*/
+	module.exports = Results;
+
+/***/ },
 /* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -25072,11 +25084,17 @@
 
 	    axios.get('http://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + searchData.topic + '&begin_date=' + searchData.start + '0101&end_date=' + searchData.end + '0101&api-key=9d4a8986921972b65754ea0809d47c84%3A12%3A74623931').then(function (response) {
 	      console.log(response.data.response.docs[1].pub_date);
-	      return response.data.response.docs[1].pub_date;
+	      var handleInfo = response.data.response.docs[1].pub_date;
+	      //this.setState({text: response.data.response.docs[1].pub_date}).bind(this);
+
+	      return {
+	        text: response.data.response.docs[1].pub_date
+	      };
 	    }).catch(function (response) {
 	      console.log(response);
 	    });
 
+	    //console.log("MOUNTED");
 	    //console.log(arr);
 	  }
 

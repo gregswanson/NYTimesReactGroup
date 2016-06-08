@@ -26,13 +26,18 @@ var helpers = {
 		axios.get('http://api.nytimes.com/svc/search/v2/articlesearch.json?q='+ searchData.topic +'&begin_date='+ searchData.start +'0101&end_date='+ searchData.end +'0101&api-key=9d4a8986921972b65754ea0809d47c84%3A12%3A74623931')
   			.then(function (response) {
     		console.log(response.data.response.docs[1].pub_date);
-    		return response.data.response.docs[1].pub_date;
+        var handleInfo = response.data.response.docs[1].pub_date;
+        //this.setState({text: response.data.response.docs[1].pub_date}).bind(this);
+
+    		return {
+            text: response.data.response.docs[1].pub_date
+          }
   		})
   		.catch(function (response) {
     	console.log(response);
   	});
 
-		
+		//console.log("MOUNTED");
 		//console.log(arr);
 	}
 

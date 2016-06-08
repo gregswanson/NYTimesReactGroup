@@ -1,6 +1,7 @@
 var React 		= require('react');
-var Query = require('../components/Search/Query.js');
-var Results = require('../components/Search/Results.js');
+var Query = require('../components/Search/Query');
+var Results = require('../components/Search/Results');
+var axios = require('axios');
 var helpers = require('../utils/helpers');
 
 
@@ -12,9 +13,19 @@ var Search = React.createClass({
 	getInitialState: function() {
      return {text: "Search to find the results"};},
 
-     update: function(){
-     	this.setState(helpers.handleSubmit);
-     },
+
+ componentDidMount: function(){
+		console.log("MOUNTED", helpers.text);
+		// helpers.getGithubInfo(this.props.params.username)
+		// 	.then(function(data){
+		// 		this.setState({
+		// 			bio: data.bio,
+		// 			repos: data.repos
+		// 		})
+		// 	// This bind function allows us to reference the higher level this 
+		// 	// and not the "this" in the smaller context function.
+		// 	}.bind(this))
+	},
 
      
 
@@ -27,7 +38,7 @@ var Search = React.createClass({
 		return (
 			<div>
 			<Query />
-			<Results data={this.update} />
+			<Results data={this.state.text} />
 			</div>
 		)
 	}
