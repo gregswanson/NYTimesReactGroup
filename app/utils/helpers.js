@@ -2,15 +2,6 @@
 var axios = require('axios');
 
 
-// Here we have two functions for querying for user and repo information to the GitHub website.
-function getRepos(username){
-	return axios.get('https://api.github.com/users/' + username + '/repos');
-};
-
-function getUserInfo(username){
-	return axios.get('https://api.github.com/users/' + username);
-};
-
 
 /*This is how promises work... if I invoked the getRepos function
 That will return the promiseObj which has a .then property on it.
@@ -25,25 +16,27 @@ Promises help us to avoid callbacks.
 // var promiseObj = getRepos('tylermcginnis');
 // promiseObj.then(function(data){
 
-
+// 'http://api.nytimes.com/svc/search/v2/articlesearch.json?q='+ searchData.topic +'&begin_date='+ searchData.start +'0101&end_date='+ searchData.end +'0101&api-key=9d4a8986921972b65754ea0809d47c84%3A12%3A74623931'
 // });
 
 // We need both to be invoked at the same time...
 var helpers = {
-	getGithubInfo: function(username){
-		// Axios will wait for both of these promises to get done...
-		// It will then return them both as an array.
-		// We will then take the object that utilizes the array to hold the bio and repos.
-		return axios.all([getRepos(username), getUserInfo(username)])
-			.then(function(arr){
-				return {
-					repos: arr[0].data,
-					bio: arr[1].data
-				}
-			})
+	handleSubmit: function(searchData) {
+		
+		axios.get('http://api.nytimes.com/svc/search/v2/articlesearch.json?q='+ searchData.topic +'&begin_date='+ searchData.start +'0101&end_date='+ searchData.end +'0101&api-key=9d4a8986921972b65754ea0809d47c84%3A12%3A74623931')
+  			.then(function (response) {
+    		console.log(response.data.response.docs[1].pub_date);
+    		return response.data.response.docs[1].pub_date;
+  		})
+  		.catch(function (response) {
+    	console.log(response);
+  	});
+
+		
+		//console.log(arr);
 	}
 
-}
+};
 
 // We export the helpers function
 module.exports = helpers;

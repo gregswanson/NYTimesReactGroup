@@ -1,30 +1,34 @@
 var React = require('react');
 
+var helpers = require('../../utils/helpers');
+
 // Here we create a component to hold the repos informatino
 var Query = React.createClass({
 	getInitialState: function() {
     return {author: '', text: ''};
 	  },
-	  handleAuthorChange: function(e) {
-	    this.setState({author: e.target.value});
-	  },
-	  handleTextChange: function(e) {
-	    this.setState({text: e.target.value});
-	  },
-	  handleSubmit: function(e) {
-	    e.preventDefault();
-	    var author = this.state.author.trim();
-	    var text = this.state.text.trim();
-	    if (!text || !author) {
+	 searchFunc: function(e){
+	 	e.preventDefault();
+	 	var searchData = {};
+	    var topic = this.refs.topic.value;
+	    var start = this.refs.start.value;
+	    var end = this.refs.end.value;
+	    var searchData = {
+	    	topic: topic,
+	    	start: start,
+	    	end: end
+	    };
+
+	    helpers.handleSubmit(searchData);
+	    // var start = this.state.text.trim();
+	    // var send = this.state.text.trim();
+	    // 	console.log(searchData);
 	      return;
-	    }
-	    // TODO: send request to the server
-	    this.setState({author: '', text: ''});
-  },
+	 },
 	render: function(){
 
 		// console log the query
-		console.log("Query", this.props.repos)
+		console.log("Query", this.props)
 		return(
 		<div className="row">
 			<div className="col-lg-12">
@@ -38,19 +42,19 @@ var Query = React.createClass({
 							<form>
 								<div className="form-group">
 									<h4 className=""><strong>Topic</strong></h4>
-									<input type="text" className="form-control " id="search_topic" />
+									<input type="text" className="form-control " id="search_topic" ref="topic"/>
 
 									<h4 className=""><strong>Start Year</strong></h4>
-									<input type="text" className="form-control " id="search_start" />
+									<input type="text" className="form-control " id="search_start" ref="start" />
 
 									<h4 className=""><strong>End Year</strong></h4>
-									<input type="text" className="form-control " id="search_end" />
+									<input type="text" className="form-control " id="search_end" ref="end"/>
 
 								</div>
 
 								
 								<div className="pull-right">
-									<button type="submit" className="btn btn-danger"><h4>Submit</h4></button>
+									<button type="submit" className="btn btn-danger" onClick={this.searchFunc}><h4>Submit</h4></button>
 								</div>
 							</form>
 

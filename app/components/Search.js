@@ -1,11 +1,23 @@
 var React 		= require('react');
 var Query = require('../components/Search/Query.js');
 var Results = require('../components/Search/Results.js');
+var helpers = require('../utils/helpers');
+
 
 // This creates a React Component for us.
 // It takes in a few properties that we can pass in...
 // One of which is render. Render specifies what the UI looks like for this component
 var Search = React.createClass({
+
+	getInitialState: function() {
+     return {text: "Search to find the results"};},
+
+     update: function(){
+     	this.setState(helpers.handleSubmit);
+     },
+
+     
+
 	render: function(){
 		
 		// Return and parenthesis needs to be on same line.
@@ -15,7 +27,7 @@ var Search = React.createClass({
 		return (
 			<div>
 			<Query />
-			<Results />
+			<Results data={this.update} />
 			</div>
 		)
 	}

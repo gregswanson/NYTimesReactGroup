@@ -4,7 +4,7 @@ var React = require('react');
 var Results = React.createClass({
 	render: function(){
 		// Console.log the bio object
-		console.log("Search", this.props.bio)
+		console.log("Results", this.props);
 		return(
 		<div className="row">
 			<div className="col-lg-12">
@@ -12,9 +12,11 @@ var Results = React.createClass({
 				<div className="panel panel-primary">
 					<div className="panel-heading">
 						<h1 className="panel-title"><strong><i class="fa fa-list-alt"></i>  Results</strong></h1>
+
 					</div>
 					<div className="panel-body">
 						<ul className="list-group">
+						<li className="list-group-item">{this.props.data.text}</li>
 						 	  
 						</ul>					
 					</div>
