@@ -14,7 +14,8 @@ var Search = React.createClass({
      return {text: "Search to find the results"};},
 
 
- componentDidMount: function(){
+ update: function(){
+ 	
 		console.log("MOUNTED", helpers.text);
 		// helpers.getGithubInfo(this.props.params.username)
 		// 	.then(function(data){

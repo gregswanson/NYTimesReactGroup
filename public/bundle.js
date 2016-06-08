@@ -24333,7 +24333,7 @@
 	var Main = __webpack_require__(207);
 	var Home = __webpack_require__(208);
 	var Search = __webpack_require__(209);
-	var Saved = __webpack_require__(210);
+	var Saved = __webpack_require__(232);
 	//var Query = require('../components/Search/Query.js');
 	/*Note how we include the Profile component as a route. 
 	We don't need to include the sub components like Repos or User Profile
@@ -24580,10 +24580,10 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var Query = __webpack_require__(211);
-	var Results = __webpack_require__(212);
-	var axios = __webpack_require__(214);
-	var helpers = __webpack_require__(213);
+	var Query = __webpack_require__(210);
+	var Results = __webpack_require__(231);
+	var axios = __webpack_require__(212);
+	var helpers = __webpack_require__(211);
 
 	// This creates a React Component for us.
 	// It takes in a few properties that we can pass in...
@@ -24596,7 +24596,8 @@
 			return { text: "Search to find the results" };
 		},
 
-		componentDidMount: function componentDidMount() {
+		update: function update() {
+
 			console.log("MOUNTED", helpers.text);
 			// helpers.getGithubInfo(this.props.params.username)
 			// 	.then(function(data){
@@ -24634,247 +24635,11 @@
 /* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
-
-	var React = __webpack_require__(1);
-
-	// Here we create a component for UserProfile
-	var Saved = React.createClass({
-		displayName: "Saved",
-
-		render: function render() {
-			// Console.log the bio object
-			console.log("Search", this.props.bio);
-			return React.createElement(
-				"div",
-				{ className: "row" },
-				React.createElement(
-					"div",
-					{ className: "col-lg-12" },
-					React.createElement(
-						"div",
-						{ className: "panel panel-primary" },
-						React.createElement(
-							"div",
-							{ className: "panel-heading" },
-							React.createElement(
-								"h1",
-								{ className: "panel-title" },
-								React.createElement(
-									"strong",
-									null,
-									React.createElement("i", { "class": "fa fa-list-alt" }),
-									"  Results"
-								)
-							)
-						),
-						React.createElement(
-							"div",
-							{ className: "panel-body" },
-							React.createElement(
-								"ul",
-								{ className: "list-group" },
-								React.createElement(
-									"li",
-									{ className: "list-group-item" },
-									React.createElement(
-										"h3",
-										null,
-										React.createElement(
-											"span",
-											null,
-											React.createElement(
-												"em",
-												null,
-												"Aliens Invade Paris"
-											)
-										),
-										React.createElement(
-											"span",
-											{ className: "btn-group pull-right" },
-											React.createElement(
-												"button",
-												{ className: "btn btn-default " },
-												"View Article"
-											),
-											React.createElement(
-												"button",
-												{ className: "btn btn-primary" },
-												"Delete"
-											)
-										)
-									),
-									React.createElement(
-										"p",
-										null,
-										"Date Published: 03/15/16"
-									)
-								),
-								React.createElement(
-									"li",
-									{ className: "list-group-item" },
-									React.createElement(
-										"h3",
-										null,
-										React.createElement(
-											"span",
-											null,
-											React.createElement(
-												"em",
-												null,
-												"Obama Gives Commencement Speech"
-											)
-										),
-										React.createElement(
-											"span",
-											{ className: "btn-group pull-right" },
-											React.createElement(
-												"button",
-												{ className: "btn btn-default " },
-												"View Article"
-											),
-											React.createElement(
-												"button",
-												{ className: "btn btn-primary" },
-												"Delete"
-											)
-										)
-									),
-									React.createElement(
-										"p",
-										null,
-										"Date Published: 03/15/16"
-									)
-								),
-								React.createElement(
-									"li",
-									{ className: "list-group-item" },
-									React.createElement(
-										"h3",
-										null,
-										React.createElement(
-											"span",
-											null,
-											React.createElement(
-												"em",
-												null,
-												"AIDS is Cured!"
-											)
-										),
-										React.createElement(
-											"span",
-											{ className: "btn-group pull-right" },
-											React.createElement(
-												"button",
-												{ className: "btn btn-default " },
-												"View Article"
-											),
-											React.createElement(
-												"button",
-												{ className: "btn btn-primary" },
-												"Delete"
-											)
-										)
-									),
-									React.createElement(
-										"p",
-										null,
-										"Date Published: 03/15/16"
-									)
-								),
-								React.createElement(
-									"li",
-									{ className: "list-group-item" },
-									React.createElement(
-										"h3",
-										null,
-										React.createElement(
-											"span",
-											null,
-											React.createElement(
-												"em",
-												null,
-												"Knicks Win Championship"
-											)
-										),
-										React.createElement(
-											"span",
-											{ className: "btn-group pull-right" },
-											React.createElement(
-												"button",
-												{ className: "btn btn-default " },
-												"View Article"
-											),
-											React.createElement(
-												"button",
-												{ className: "btn btn-primary" },
-												"Delete"
-											)
-										)
-									),
-									React.createElement(
-										"p",
-										null,
-										"Date Published: 03/15/16"
-									)
-								),
-								React.createElement(
-									"li",
-									{ className: "list-group-item" },
-									React.createElement(
-										"h3",
-										null,
-										React.createElement(
-											"span",
-											null,
-											React.createElement(
-												"em",
-												null,
-												"Mud: The New Superfood?"
-											)
-										),
-										React.createElement(
-											"span",
-											{ className: "btn-group pull-right" },
-											React.createElement(
-												"button",
-												{ className: "btn btn-default " },
-												"View Article"
-											),
-											React.createElement(
-												"button",
-												{ className: "btn btn-primary" },
-												"Save"
-											)
-										)
-									),
-									React.createElement(
-										"p",
-										null,
-										"Date Published: 03/15/16"
-									)
-								)
-							)
-						)
-					)
-				)
-			);
-		}
-	});
-
-	/*We then export the UserProfile component*/
-	module.exports = Saved;
-
-/***/ },
-/* 211 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 
 	var React = __webpack_require__(1);
 
-	var helpers = __webpack_require__(213);
-	var Search = __webpack_require__(209);
+	var helpers = __webpack_require__(211);
 
 	// Here we create a component to hold the repos informatino
 	var Query = React.createClass({
@@ -24994,73 +24759,14 @@
 	module.exports = Query;
 
 /***/ },
-/* 212 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	var React = __webpack_require__(1);
-
-	// Here we create a component for UserProfile
-	var Results = React.createClass({
-		displayName: "Results",
-
-		render: function render() {
-			// Console.log the bio object
-			console.log("Results", this.props);
-			return React.createElement(
-				"div",
-				{ className: "row" },
-				React.createElement(
-					"div",
-					{ className: "col-lg-12" },
-					React.createElement(
-						"div",
-						{ className: "panel panel-primary" },
-						React.createElement(
-							"div",
-							{ className: "panel-heading" },
-							React.createElement(
-								"h1",
-								{ className: "panel-title" },
-								React.createElement(
-									"strong",
-									null,
-									React.createElement("i", { "class": "fa fa-list-alt" }),
-									"  Results"
-								)
-							)
-						),
-						React.createElement(
-							"div",
-							{ className: "panel-body" },
-							React.createElement(
-								"ul",
-								{ className: "list-group" },
-								React.createElement(
-									"li",
-									{ className: "list-group-item" },
-									this.props.data
-								)
-							)
-						)
-					)
-				)
-			);
-		}
-	});
-
-	/*We then export the UserProfile component*/
-	module.exports = Results;
-
-/***/ },
-/* 213 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	/*Axios is a convenient NPM package for performing HTTP requests*/
-	var axios = __webpack_require__(214);
+	var axios = __webpack_require__(212);
+	var Search = __webpack_require__(209);
 
 	/*This is how promises work... if I invoked the getRepos function
 	That will return the promiseObj which has a .then property on it.
@@ -25084,14 +24790,13 @@
 
 	    axios.get('http://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + searchData.topic + '&begin_date=' + searchData.start + '0101&end_date=' + searchData.end + '0101&api-key=9d4a8986921972b65754ea0809d47c84%3A12%3A74623931').then(function (response) {
 	      console.log(response.data.response.docs[1].pub_date);
-	      var handleInfo = response.data.response.docs[1].pub_date;
+	      //Search.update();
+
 	      //this.setState({text: response.data.response.docs[1].pub_date}).bind(this);
 
-	      return {
-	        text: response.data.response.docs[1].pub_date
-	      };
+	      return;
 	    }).catch(function (response) {
-	      console.log(response);
+	      //console.log(response);
 	    });
 
 	    //console.log("MOUNTED");
@@ -25104,27 +24809,27 @@
 	module.exports = helpers;
 
 /***/ },
-/* 214 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	module.exports = __webpack_require__(215);
+	module.exports = __webpack_require__(213);
 
 /***/ },
-/* 215 */
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var defaults = __webpack_require__(216);
-	var utils = __webpack_require__(217);
-	var dispatchRequest = __webpack_require__(219);
-	var InterceptorManager = __webpack_require__(228);
-	var isAbsoluteURL = __webpack_require__(229);
-	var combineURLs = __webpack_require__(230);
-	var bind = __webpack_require__(231);
-	var transformData = __webpack_require__(223);
+	var defaults = __webpack_require__(214);
+	var utils = __webpack_require__(215);
+	var dispatchRequest = __webpack_require__(217);
+	var InterceptorManager = __webpack_require__(226);
+	var isAbsoluteURL = __webpack_require__(227);
+	var combineURLs = __webpack_require__(228);
+	var bind = __webpack_require__(229);
+	var transformData = __webpack_require__(221);
 
 	function Axios(defaultConfig) {
 	  this.defaults = utils.merge({}, defaultConfig);
@@ -25202,7 +24907,7 @@
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(232);
+	axios.spread = __webpack_require__(230);
 
 	// Provide aliases for supported request methods
 	utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
@@ -25229,13 +24934,13 @@
 	});
 
 /***/ },
-/* 216 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(217);
-	var normalizeHeaderName = __webpack_require__(218);
+	var utils = __webpack_require__(215);
+	var normalizeHeaderName = __webpack_require__(216);
 
 	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 	var DEFAULT_CONTENT_TYPE = {
@@ -25301,7 +25006,7 @@
 	};
 
 /***/ },
-/* 217 */
+/* 215 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -25581,12 +25286,12 @@
 	};
 
 /***/ },
-/* 218 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(217);
+	var utils = __webpack_require__(215);
 
 	module.exports = function normalizeHeaderName(headers, normalizedName) {
 	  utils.forEach(headers, function processHeader(value, name) {
@@ -25598,7 +25303,7 @@
 	};
 
 /***/ },
-/* 219 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -25621,10 +25326,10 @@
 	        adapter = config.adapter;
 	      } else if (typeof XMLHttpRequest !== 'undefined') {
 	        // For browsers use XHR adapter
-	        adapter = __webpack_require__(220);
+	        adapter = __webpack_require__(218);
 	      } else if (typeof process !== 'undefined') {
 	        // For node use HTTP adapter
-	        adapter = __webpack_require__(220);
+	        adapter = __webpack_require__(218);
 	      }
 
 	      if (typeof adapter === 'function') {
@@ -25638,18 +25343,18 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 220 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(217);
-	var buildURL = __webpack_require__(221);
-	var parseHeaders = __webpack_require__(222);
-	var transformData = __webpack_require__(223);
-	var isURLSameOrigin = __webpack_require__(224);
-	var btoa = typeof window !== 'undefined' && window.btoa || __webpack_require__(225);
-	var settle = __webpack_require__(226);
+	var utils = __webpack_require__(215);
+	var buildURL = __webpack_require__(219);
+	var parseHeaders = __webpack_require__(220);
+	var transformData = __webpack_require__(221);
+	var isURLSameOrigin = __webpack_require__(222);
+	var btoa = typeof window !== 'undefined' && window.btoa || __webpack_require__(223);
+	var settle = __webpack_require__(224);
 
 	module.exports = function xhrAdapter(resolve, reject, config) {
 	  var requestData = config.data;
@@ -25742,7 +25447,7 @@
 	  // This is only done if running in a standard browser environment.
 	  // Specifically not if we're in a web worker, or react-native.
 	  if (utils.isStandardBrowserEnv()) {
-	    var cookies = __webpack_require__(227);
+	    var cookies = __webpack_require__(225);
 
 	    // Add xsrf header
 	    var xsrfValue = config.withCredentials || isURLSameOrigin(config.url) ? cookies.read(config.xsrfCookieName) : undefined;
@@ -25800,12 +25505,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 221 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(217);
+	var utils = __webpack_require__(215);
 
 	function encode(val) {
 	  return encodeURIComponent(val).replace(/%40/gi, '@').replace(/%3A/gi, ':').replace(/%24/g, '$').replace(/%2C/gi, ',').replace(/%20/g, '+').replace(/%5B/gi, '[').replace(/%5D/gi, ']');
@@ -25866,12 +25571,12 @@
 	};
 
 /***/ },
-/* 222 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(217);
+	var utils = __webpack_require__(215);
 
 	/**
 	 * Parse headers into an object
@@ -25910,12 +25615,12 @@
 	};
 
 /***/ },
-/* 223 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(217);
+	var utils = __webpack_require__(215);
 
 	/**
 	 * Transform the data for a request or a response
@@ -25935,12 +25640,12 @@
 	};
 
 /***/ },
-/* 224 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(217);
+	var utils = __webpack_require__(215);
 
 	module.exports = utils.isStandardBrowserEnv() ?
 
@@ -26003,7 +25708,7 @@
 	}();
 
 /***/ },
-/* 225 */
+/* 223 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26043,7 +25748,7 @@
 	module.exports = btoa;
 
 /***/ },
-/* 226 */
+/* 224 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26067,12 +25772,12 @@
 	};
 
 /***/ },
-/* 227 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(217);
+	var utils = __webpack_require__(215);
 
 	module.exports = utils.isStandardBrowserEnv() ?
 
@@ -26125,12 +25830,12 @@
 	}();
 
 /***/ },
-/* 228 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(217);
+	var utils = __webpack_require__(215);
 
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -26182,7 +25887,7 @@
 	module.exports = InterceptorManager;
 
 /***/ },
-/* 229 */
+/* 227 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26203,7 +25908,7 @@
 	};
 
 /***/ },
-/* 230 */
+/* 228 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26221,7 +25926,7 @@
 	};
 
 /***/ },
-/* 231 */
+/* 229 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26237,7 +25942,7 @@
 	};
 
 /***/ },
-/* 232 */
+/* 230 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26268,6 +25973,301 @@
 	    return callback.apply(null, arr);
 	  };
 	};
+
+/***/ },
+/* 231 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	// Here we create a component for UserProfile
+	var Results = React.createClass({
+		displayName: "Results",
+
+		render: function render() {
+			// Console.log the bio object
+			console.log("Results", this.props);
+			return React.createElement(
+				"div",
+				{ className: "row" },
+				React.createElement(
+					"div",
+					{ className: "col-lg-12" },
+					React.createElement(
+						"div",
+						{ className: "panel panel-primary" },
+						React.createElement(
+							"div",
+							{ className: "panel-heading" },
+							React.createElement(
+								"h1",
+								{ className: "panel-title" },
+								React.createElement(
+									"strong",
+									null,
+									React.createElement("i", { "class": "fa fa-list-alt" }),
+									"  Results"
+								)
+							)
+						),
+						React.createElement(
+							"div",
+							{ className: "panel-body" },
+							React.createElement(
+								"ul",
+								{ className: "list-group" },
+								React.createElement(
+									"li",
+									{ className: "list-group-item" },
+									this.props.data
+								)
+							)
+						)
+					)
+				)
+			);
+		}
+	});
+
+	/*We then export the UserProfile component*/
+	module.exports = Results;
+
+/***/ },
+/* 232 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	// Here we create a component for UserProfile
+	var Saved = React.createClass({
+		displayName: "Saved",
+
+		render: function render() {
+			// Console.log the bio object
+			console.log("Search", this.props.bio);
+			return React.createElement(
+				"div",
+				{ className: "row" },
+				React.createElement(
+					"div",
+					{ className: "col-lg-12" },
+					React.createElement(
+						"div",
+						{ className: "panel panel-primary" },
+						React.createElement(
+							"div",
+							{ className: "panel-heading" },
+							React.createElement(
+								"h1",
+								{ className: "panel-title" },
+								React.createElement(
+									"strong",
+									null,
+									React.createElement("i", { "class": "fa fa-list-alt" }),
+									"  Results"
+								)
+							)
+						),
+						React.createElement(
+							"div",
+							{ className: "panel-body" },
+							React.createElement(
+								"ul",
+								{ className: "list-group" },
+								React.createElement(
+									"li",
+									{ className: "list-group-item" },
+									React.createElement(
+										"h3",
+										null,
+										React.createElement(
+											"span",
+											null,
+											React.createElement(
+												"em",
+												null,
+												"Aliens Invade Paris"
+											)
+										),
+										React.createElement(
+											"span",
+											{ className: "btn-group pull-right" },
+											React.createElement(
+												"button",
+												{ className: "btn btn-default " },
+												"View Article"
+											),
+											React.createElement(
+												"button",
+												{ className: "btn btn-primary" },
+												"Delete"
+											)
+										)
+									),
+									React.createElement(
+										"p",
+										null,
+										"Date Published: 03/15/16"
+									)
+								),
+								React.createElement(
+									"li",
+									{ className: "list-group-item" },
+									React.createElement(
+										"h3",
+										null,
+										React.createElement(
+											"span",
+											null,
+											React.createElement(
+												"em",
+												null,
+												"Obama Gives Commencement Speech"
+											)
+										),
+										React.createElement(
+											"span",
+											{ className: "btn-group pull-right" },
+											React.createElement(
+												"button",
+												{ className: "btn btn-default " },
+												"View Article"
+											),
+											React.createElement(
+												"button",
+												{ className: "btn btn-primary" },
+												"Delete"
+											)
+										)
+									),
+									React.createElement(
+										"p",
+										null,
+										"Date Published: 03/15/16"
+									)
+								),
+								React.createElement(
+									"li",
+									{ className: "list-group-item" },
+									React.createElement(
+										"h3",
+										null,
+										React.createElement(
+											"span",
+											null,
+											React.createElement(
+												"em",
+												null,
+												"AIDS is Cured!"
+											)
+										),
+										React.createElement(
+											"span",
+											{ className: "btn-group pull-right" },
+											React.createElement(
+												"button",
+												{ className: "btn btn-default " },
+												"View Article"
+											),
+											React.createElement(
+												"button",
+												{ className: "btn btn-primary" },
+												"Delete"
+											)
+										)
+									),
+									React.createElement(
+										"p",
+										null,
+										"Date Published: 03/15/16"
+									)
+								),
+								React.createElement(
+									"li",
+									{ className: "list-group-item" },
+									React.createElement(
+										"h3",
+										null,
+										React.createElement(
+											"span",
+											null,
+											React.createElement(
+												"em",
+												null,
+												"Knicks Win Championship"
+											)
+										),
+										React.createElement(
+											"span",
+											{ className: "btn-group pull-right" },
+											React.createElement(
+												"button",
+												{ className: "btn btn-default " },
+												"View Article"
+											),
+											React.createElement(
+												"button",
+												{ className: "btn btn-primary" },
+												"Delete"
+											)
+										)
+									),
+									React.createElement(
+										"p",
+										null,
+										"Date Published: 03/15/16"
+									)
+								),
+								React.createElement(
+									"li",
+									{ className: "list-group-item" },
+									React.createElement(
+										"h3",
+										null,
+										React.createElement(
+											"span",
+											null,
+											React.createElement(
+												"em",
+												null,
+												"Mud: The New Superfood?"
+											)
+										),
+										React.createElement(
+											"span",
+											{ className: "btn-group pull-right" },
+											React.createElement(
+												"button",
+												{ className: "btn btn-default " },
+												"View Article"
+											),
+											React.createElement(
+												"button",
+												{ className: "btn btn-primary" },
+												"Save"
+											)
+										)
+									),
+									React.createElement(
+										"p",
+										null,
+										"Date Published: 03/15/16"
+									)
+								)
+							)
+						)
+					)
+				)
+			);
+		}
+	});
+
+	/*We then export the UserProfile component*/
+	module.exports = Saved;
 
 /***/ }
 /******/ ]);

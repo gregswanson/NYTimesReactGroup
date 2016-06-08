@@ -1,7 +1,7 @@
 var React = require('react');
 
 var helpers = require('../../utils/helpers');
-var Search = require('../Search');
+
 
 // Here we create a component to hold the repos informatino
 var Query = React.createClass({
