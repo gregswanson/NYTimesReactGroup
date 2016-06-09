@@ -27,7 +27,8 @@ var helpers = {
   			.then(function (response) {
     		console.log(response.data.response.docs[1].pub_date);
         //Search.update();
-        
+        alert("Helper");
+        Search.update();
         //this.setState({text: response.data.response.docs[1].pub_date}).bind(this);
 
     		return 

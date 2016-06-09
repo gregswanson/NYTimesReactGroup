@@ -24593,22 +24593,54 @@
 
 
 		getInitialState: function getInitialState() {
-			return { text: "Search to find the results" };
+			return {
+				topic: '',
+				start: '',
+				end: '',
+				results: []
+			};
 		},
 
-		update: function update() {
+		// 	update: function(){
+		// 		this.setState({
+		// 				text: 'the text has changed'
 
-			console.log("MOUNTED", helpers.text);
-			// helpers.getGithubInfo(this.props.params.username)
-			// 	.then(function(data){
-			// 		this.setState({
-			// 			bio: data.bio,
-			// 			repos: data.repos
-			// 		})
-			// 	// This bind function allows us to reference the higher level this
-			// 	// and not the "this" in the smaller context function.
-			// 	}.bind(this))
-		},
+		// 	 		})
+
+		// 	console.log("MOUNTED", helpers.text);
+		// 	// helpers.getGithubInfo(this.props.params.username)
+		// 	// 	.then(function(data){
+		// 	// 		this.setState({
+		// 	// 			bio: data.bio,
+		// 	// 			repos: data.repos
+		// 	// 		})
+		// 	// 	// This bind function allows us to reference the higher level this
+		// 	// 	// and not the "this" in the smaller context function.
+		// 	// 	}.bind(this))
+		// },
+
+		//  searchFunc: function(e){
+		//  	e.preventDefault();
+		//  	var searchData = {};
+		//     var topic = this.refs.topic.value;
+		//     var start = this.refs.start.value;
+		//     var end = this.refs.end.value;
+		//     var searchData = {
+		//     	topic: topic,
+		//     	start: start,
+		//     	end: end
+		//     };
+
+		//    helpers.handleSubmit(searchData);
+		//    // var start = this.state.text.trim();
+		//    // var send = this.state.text.trim();
+		//    // 	console.log(searchData);
+		//      return;
+		// },
+
+		// updateState: function(){
+		// 	//state =
+		// },
 
 		render: function render() {
 
@@ -24619,10 +24651,32 @@
 			return React.createElement(
 				'div',
 				null,
-				React.createElement(Query, null),
-				React.createElement(Results, { data: this.state.text })
+				React.createElement(Query, { onUpdate: this.onUpdate }),
+				React.createElement(Results, { results: this.state.results })
 			);
+		},
+
+		onUpdate: function onUpdate(searchData) {
+			console.log("onUpdate");
+			console.log(searchData);
+			axios.get('http://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + searchData.topic + '&begin_date=' + searchData.start + '0101&end_date=' + searchData.end + '0101&api-key=9d4a8986921972b65754ea0809d47c84%3A12%3A74623931').then(function (response) {
+				console.log(response.data.response.docs[1].pub_date);
+				//Search.update();
+				//alert("Helper");
+				// console.log("response");
+				// console.log(response.data.response.docs);
+				this.setState({
+					results: response.data.response.docs
+				});
+
+				//this.setState({text: response.data.response.docs[1].pub_date}).bind(this);
+				console.log(this.state.result);
+			}.bind(this));
+
+			//console.log("MOUNTED");
+			//console.log(arr);
 		}
+
 	});
 
 	// Tell it which component to render and where we will render it to.
@@ -24645,28 +24699,57 @@
 	var Query = React.createClass({
 		displayName: 'Query',
 
-		// getInitialState: function() {
-		//    return {author: '', text: ''};
-		//   },
 
-		searchFunc: function searchFunc(e) {
-			e.preventDefault();
-			var searchData = {};
-			var topic = this.refs.topic.value;
-			var start = this.refs.start.value;
-			var end = this.refs.end.value;
-			var searchData = {
-				topic: topic,
-				start: start,
-				end: end
+		getInitialState: function getInitialState() {
+			//    etInitialState: function() {
+			return {
+				topic: '',
+				start: '',
+				end: ''
 			};
-
-			helpers.handleSubmit(searchData);
-			// var start = this.state.text.trim();
-			// var send = this.state.text.trim();
-			// 	console.log(searchData);
-			return;
 		},
+
+		setQuery: function setQuery(newQuery, newStart, newEnd) {},
+
+		// searchFunc: function(e){
+		// 	e.preventDefault();
+		// 	var searchData = {};
+		//    var topic = this.refs.topic.value;
+		//    var start = this.refs.start.value;
+		//    var end = this.refs.end.value;
+		//    var searchData = {
+		//    	topic: topic,
+		//    	start: start,
+		//    	end: end
+		//    };
+
+		//    helpers.handleSubmit(searchData);
+		//    // var start = this.state.text.trim();
+		//    // var send = this.state.text.trim();
+		//    // 	console.log(searchData);
+		//      return;
+		// },
+
+		//  handleSubmit: function(searchData) {
+
+		// 	axios.get('http://api.nytimes.com/svc/search/v2/articlesearch.json?q='+ searchData.topic +'&begin_date='+ searchData.start +'0101&end_date='+ searchData.end +'0101&api-key=9d4a8986921972b65754ea0809d47c84%3A12%3A74623931')
+		//  			.then(function (response) {
+		//    		console.log(response.data.response.docs[1].pub_date);
+		//        //Search.update();
+		//        alert("Helper");
+		//        Search.update();
+		//        //this.setState({text: response.data.response.docs[1].pub_date}).bind(this);
+
+		//    		return
+		//  		})
+		//  		.catch(function (response) {
+		//    	//console.log(response);
+		//  	});
+
+		// 	//console.log("MOUNTED");
+		// 	//console.log(arr);
+		// },
+
 		render: function render() {
 
 			// console log the query
@@ -24739,7 +24822,7 @@
 									{ className: 'pull-right' },
 									React.createElement(
 										'button',
-										{ type: 'submit', className: 'btn btn-danger', onClick: this.searchFunc },
+										{ type: 'submit', className: 'btn btn-danger', onClick: this.update },
 										React.createElement(
 											'h4',
 											null,
@@ -24752,6 +24835,21 @@
 					)
 				)
 			);
+		},
+
+		update: function update() {
+			//preventDefault();
+			//var searchData = {};
+			var topic = this.refs.topic.value;
+			var start = this.refs.start.value;
+			var end = this.refs.end.value;
+			var searchData = {
+				topic: topic,
+				start: start,
+				end: end
+			};
+
+			this.props.onUpdate(searchData);
 		}
 	});
 
@@ -24791,7 +24889,8 @@
 	    axios.get('http://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + searchData.topic + '&begin_date=' + searchData.start + '0101&end_date=' + searchData.end + '0101&api-key=9d4a8986921972b65754ea0809d47c84%3A12%3A74623931').then(function (response) {
 	      console.log(response.data.response.docs[1].pub_date);
 	      //Search.update();
-
+	      alert("Helper");
+	      Search.update();
 	      //this.setState({text: response.data.response.docs[1].pub_date}).bind(this);
 
 	      return;
@@ -25986,9 +26085,55 @@
 	var Results = React.createClass({
 		displayName: "Results",
 
+		getInitialState: function getInitialState() {
+			return {
+				results: []
+			};
+		},
+
 		render: function render() {
 			// Console.log the bio object
-			console.log("Results", this.props);
+			//console.log("Results", this.props);
+			var results = this.props.results.map(function (result, index) {
+				return React.createElement(
+					"li",
+					{ className: "list-group-item", index: index },
+					React.createElement(
+						"h3",
+						null,
+						React.createElement(
+							"span",
+							null,
+							React.createElement(
+								"em",
+								null,
+								result.headline.main
+							)
+						),
+						React.createElement(
+							"span",
+							{ className: "btn-group pull-right" },
+							React.createElement(
+								"button",
+								{ className: "btn btn-default " },
+								"View Article"
+							),
+							React.createElement(
+								"button",
+								{ className: "btn btn-primary" },
+								"Save"
+							)
+						)
+					),
+					React.createElement(
+						"p",
+						null,
+						"Date Published: ",
+						result.pub_date
+					)
+				);
+			});
+
 			return React.createElement(
 				"div",
 				{ className: "row" },
@@ -26018,11 +26163,7 @@
 							React.createElement(
 								"ul",
 								{ className: "list-group" },
-								React.createElement(
-									"li",
-									{ className: "list-group-item" },
-									this.props.data
-								)
+								results
 							)
 						)
 					)

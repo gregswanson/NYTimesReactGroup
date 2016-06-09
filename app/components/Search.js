@@ -11,24 +11,57 @@ var helpers = require('../utils/helpers');
 var Search = React.createClass({
 
 	getInitialState: function() {
-     return {text: "Search to find the results"};},
+     return {
+     		topic: '',
+ 			start: '',
+ 			end: '',
+ 			results: []
+ 		};},
 
 
- update: function(){
+
+
+ // 	update: function(){
+ // 		this.setState({
+	// 				text: 'the text has changed'
+		
+	// 	 		})
  	
-		console.log("MOUNTED", helpers.text);
-		// helpers.getGithubInfo(this.props.params.username)
-		// 	.then(function(data){
-		// 		this.setState({
-		// 			bio: data.bio,
-		// 			repos: data.repos
-		// 		})
-		// 	// This bind function allows us to reference the higher level this 
-		// 	// and not the "this" in the smaller context function.
-		// 	}.bind(this))
-	},
+	// 	console.log("MOUNTED", helpers.text);
+	// 	// helpers.getGithubInfo(this.props.params.username)
+	// 	// 	.then(function(data){
+	// 	// 		this.setState({
+	// 	// 			bio: data.bio,
+	// 	// 			repos: data.repos
+	// 	// 		})
+	// 	// 	// This bind function allows us to reference the higher level this 
+	// 	// 	// and not the "this" in the smaller context function.
+	// 	// 	}.bind(this))
+	// },
 
-     
+	//  searchFunc: function(e){
+	//  	e.preventDefault();
+	//  	var searchData = {};
+	//     var topic = this.refs.topic.value;
+	//     var start = this.refs.start.value;
+	//     var end = this.refs.end.value;
+	//     var searchData = {
+	//     	topic: topic,
+	//     	start: start,
+	//     	end: end
+	//     };
+
+	 //    helpers.handleSubmit(searchData);
+	 //    // var start = this.state.text.trim();
+	 //    // var send = this.state.text.trim();
+	 //    // 	console.log(searchData);
+	 //      return;
+	 // },
+
+
+     // updateState: function(){
+     // 	//state = 
+     // }, 
 
 	render: function(){
 		
@@ -38,12 +71,38 @@ var Search = React.createClass({
 
 		return (
 			<div>
-			<Query />
-			<Results data={this.state.text} />
+			<Query onUpdate={this.onUpdate} />
+			<Results results={this.state.results} />
 			</div>
 		)
+	},
+
+	onUpdate: function(searchData){
+		console.log("onUpdate");
+		console.log(searchData);
+		axios.get('http://api.nytimes.com/svc/search/v2/articlesearch.json?q='+ searchData.topic +'&begin_date='+ searchData.start +'0101&end_date='+ searchData.end +'0101&api-key=9d4a8986921972b65754ea0809d47c84%3A12%3A74623931')
+  			.then(function (response) {
+    		console.log(response.data.response.docs[1].pub_date);
+        //Search.update();
+        //alert("Helper");
+        // console.log("response");
+        // console.log(response.data.response.docs);
+      	this.setState({
+ 			results: response.data.response.docs
+      	})
+        
+        //this.setState({text: response.data.response.docs[1].pub_date}).bind(this);
+        console.log(this.state.result)
+  		
+  		}.bind(this));
+  		
+
+		//console.log("MOUNTED");
+		//console.log(arr);
 	}
+  
 });
+
 
 // Tell it which component to render and where we will render it to.
 // Then we run webpack -w

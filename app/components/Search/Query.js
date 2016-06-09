@@ -5,28 +5,59 @@ var helpers = require('../../utils/helpers');
 
 // Here we create a component to hold the repos informatino
 var Query = React.createClass({
-	// getInitialState: function() {
- //    return {author: '', text: ''};
-	//   },
+	
+	getInitialState: function() {
+ //    etInitialState: function() {
+     return {
+     		topic: '',
+ 			start: '',
+ 			end: ''
+ 		};},
+	 
+	 setQuery: function(newQuery, newStart, newEnd){
 
-	 searchFunc: function(e){
-	 	e.preventDefault();
-	 	var searchData = {};
-	    var topic = this.refs.topic.value;
-	    var start = this.refs.start.value;
-	    var end = this.refs.end.value;
-	    var searchData = {
-	    	topic: topic,
-	    	start: start,
-	    	end: end
-	    };
 
-	    helpers.handleSubmit(searchData);
-	    // var start = this.state.text.trim();
-	    // var send = this.state.text.trim();
-	    // 	console.log(searchData);
-	      return;
-	 },
+	 },  
+
+	 // searchFunc: function(e){
+	 // 	e.preventDefault();
+	 // 	var searchData = {};
+	 //    var topic = this.refs.topic.value;
+	 //    var start = this.refs.start.value;
+	 //    var end = this.refs.end.value;
+	 //    var searchData = {
+	 //    	topic: topic,
+	 //    	start: start,
+	 //    	end: end
+	 //    };
+
+	 //    helpers.handleSubmit(searchData);
+	 //    // var start = this.state.text.trim();
+	 //    // var send = this.state.text.trim();
+	 //    // 	console.log(searchData);
+	 //      return;
+	 // },
+
+	//  handleSubmit: function(searchData) {
+		
+	// 	axios.get('http://api.nytimes.com/svc/search/v2/articlesearch.json?q='+ searchData.topic +'&begin_date='+ searchData.start +'0101&end_date='+ searchData.end +'0101&api-key=9d4a8986921972b65754ea0809d47c84%3A12%3A74623931')
+ //  			.then(function (response) {
+ //    		console.log(response.data.response.docs[1].pub_date);
+ //        //Search.update();
+ //        alert("Helper");
+ //        Search.update();
+ //        //this.setState({text: response.data.response.docs[1].pub_date}).bind(this);
+
+ //    		return 
+ //  		})
+ //  		.catch(function (response) {
+ //    	//console.log(response);
+ //  	});
+
+	// 	//console.log("MOUNTED");
+	// 	//console.log(arr);
+	// },
+
 	render: function(){
 
 		// console log the query
@@ -56,7 +87,7 @@ var Query = React.createClass({
 
 								
 								<div className="pull-right">
-									<button type="submit" className="btn btn-danger" onClick={this.searchFunc}><h4>Submit</h4></button>
+									<button type="submit" className="btn btn-danger" onClick={this.update}><h4>Submit</h4></button>
 								</div>
 							</form>
 
@@ -65,7 +96,23 @@ var Query = React.createClass({
 			</div>
 		</div>
 		)
-	}
+	},
+
+	update: function()
+    {
+    	//preventDefault();
+		//var searchData = {};
+        var topic = this.refs.topic.value;
+	    var start = this.refs.start.value;
+	    var end = this.refs.end.value;
+	    var searchData = {
+	    	topic: topic,
+	    	start: start,
+	    	end: end
+	    };
+
+        this.props.onUpdate(searchData);
+    }
 });
 
 /*We then export the Repos component*/
