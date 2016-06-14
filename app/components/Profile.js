@@ -9,9 +9,7 @@ var UserProfile = require('./GitHub/UserProfile');
 var helpers = require('../utils/helpers');
 
 
-/* Profile manages three two states:
-	Bio, Repos
-*/
+
 var Profile = React.createClass({
 	/*This will set the initial state for any state the component handles. usually empty data*/
 	getInitialState: function(){

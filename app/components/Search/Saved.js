@@ -10,9 +10,7 @@ var Saved = React.createClass({
  		};},
 
  	componentDidMount: function(){
-		// alert(searchData.text);
-		// console.log("onUpdate");
-		// console.log(searchData);
+		
 		$.ajax({
 		    method: "GET",
 		    url: "/articles/",

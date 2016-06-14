@@ -24018,12 +24018,6 @@
 	var Home = __webpack_require__(208);
 	var Search = __webpack_require__(209);
 	var Saved = __webpack_require__(232);
-	//var Query = require('../components/Search/Query.js');
-	/*Note how we include the Profile component as a route. 
-	We don't need to include the sub components like Repos or User Profile
-	These are already included here.
-	*/
-	//var Profile = require('../components/Profile');
 
 	// We will then pull the router
 	var Router = __webpack_require__(159);
@@ -24347,7 +24341,7 @@
 
 
 	    getInitialState: function getInitialState() {
-	        //    etInitialState: function() {
+
 	        return {
 	            topic: '',
 	            start: '',
@@ -25743,7 +25737,6 @@
 	var React = __webpack_require__(1);
 	var helpers = __webpack_require__(211);
 
-	// Here we create a component for UserProfile
 	var Results = React.createClass({
 	    displayName: 'Results',
 
@@ -25852,9 +25845,7 @@
 	    },
 
 	    componentDidMount: function componentDidMount() {
-	        // alert(searchData.text);
-	        // console.log("onUpdate");
-	        // console.log(searchData);
+
 	        $.ajax({
 	            method: "GET",
 	            url: "/articles/"

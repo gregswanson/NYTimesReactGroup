@@ -7,7 +7,7 @@ var helpers = require('../../utils/helpers');
 var Query = React.createClass({
 	
 	getInitialState: function() {
- //    etInitialState: function() {
+ 
      return {
      		topic: '',
  			start: '',

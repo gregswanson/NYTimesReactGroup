@@ -1,7 +1,7 @@
 var React = require('react');
 var helpers = require('../../utils/helpers');
 
-// Here we create a component for UserProfile
+
 var Results = React.createClass({
     render: function(){
         var results = this.props.results.map(function(result, i){

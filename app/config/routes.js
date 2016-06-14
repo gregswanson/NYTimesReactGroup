@@ -5,12 +5,7 @@ var Main = require('../components/Main');
 var Home = require('../components/Home');
 var Search = require('../components/Search');
 var Saved = require('../components/Search/Saved.js');
-//var Query = require('../components/Search/Query.js');
-/*Note how we include the Profile component as a route. 
-We don't need to include the sub components like Repos or User Profile
-These are already included here.
-*/
-//var Profile = require('../components/Profile');
+
 
 // We will then pull the router 
 var Router = require('react-router');
