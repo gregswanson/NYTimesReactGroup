@@ -46,10 +46,18 @@ var helpers = {
     var savedData = {
       title: data.headline.main,
       date: data.pub_date,
-      url: data.web_url
+      link: data.web_url
     }
-    console.log(savedData);
-  }
+
+    var URL = "/articles";
+  //var currentURL = window.location.origin;
+
+    $.post( URL, savedData)
+      .done(function(data){
+        //console.log(data);
+
+      console.log(savedData);
+    });
 
 };
 

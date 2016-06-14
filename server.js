@@ -15,7 +15,7 @@ app.use(express.static('public'));
 
 //database
 //mongoose.connect('mongodb://localhost/mongoosescraper');
-var mongodbUri = 'mongodb://greg:12345@ds021343.mlab.com:21343/heroku_lh1cvw0w';
+var mongodbUri = 'mongodb://greg:darien@ds013212.mlab.com:13212/heroku_w85mspxk';
 
 mongoose.connect(mongodbUri);
 var db = mongoose.connection;
@@ -35,6 +35,14 @@ app.get('/', function(req, res) {
   res.send(index.html);
 });
 
+
+app.post('/articles', function(req, res){
+	var newArticle = new Article(req.body);
+
+	newArticle.save(function (err) {
+  		if (!err) console.log('Success!');
+	});
+ });
 
 
 
@@ -80,25 +88,6 @@ app.get('/', function(req, res) {
 // //////////////////////////////
 
 
-// app.post('/articles/:id', function(req, res){
-// 	var newNote = new Note(req.body);
-
-// 	newNote.save(function(err, doc){
-// 		if(err){
-// 			console.log(err);
-// 		} else {
-// 			Article.findOneAndUpdate({'_id': req.params.id}, {'note':doc._id})
-// 			.exec(function(err, doc){
-// 				if (err){
-// 					console.log(err);
-// 				} else {
-// 					res.send(doc);
-// 				}
-// 			});
-
-// 		}
-// 	});
-// });
 
 
 //listen
