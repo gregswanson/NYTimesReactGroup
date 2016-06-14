@@ -47,7 +47,7 @@ var helpers = {
       title: data.headline.main,
       date: data.pub_date,
       link: data.web_url
-    }
+    };
 
     var URL = "/articles";
   //var currentURL = window.location.origin;
@@ -58,7 +58,7 @@ var helpers = {
 
       console.log(savedData);
     });
-
+  }
 };
 
 // We export the helpers function

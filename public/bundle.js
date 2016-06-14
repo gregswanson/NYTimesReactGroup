@@ -24266,6 +24266,7 @@
 	var React = __webpack_require__(1);
 	var Query = __webpack_require__(210);
 	var Results = __webpack_require__(231);
+	var Saved = __webpack_require__(232);
 	var axios = __webpack_require__(212);
 	var helpers = __webpack_require__(211);
 
@@ -24273,94 +24274,54 @@
 	// It takes in a few properties that we can pass in...
 	// One of which is render. Render specifies what the UI looks like for this component
 	var Search = React.createClass({
-		displayName: 'Search',
+	  displayName: 'Search',
 
 
-		getInitialState: function getInitialState() {
-			return {
-				text: '',
-				begin: '',
-				end: '',
-				results: []
-			};
-		},
+	  getInitialState: function getInitialState() {
+	    return {
+	      text: '',
+	      begin: '',
+	      end: '',
+	      results: [],
+	      saved: []
+	    };
+	  },
 
-		// 	update: function(){
-		// 		this.setState({
-		// 				text: 'the text has changed'
+	  render: function render() {
 
-		// 	 		})
+	    // Return and parenthesis needs to be on same line.
+	    /*this.props.children will get replaced by the active component which will be our home component*/
+	    /*This is because the "home.js" file is inside of the main component*/
 
-		// 	console.log("MOUNTED", helpers.text);
-		// 	// helpers.getGithubInfo(this.props.params.username)
-		// 	// 	.then(function(data){
-		// 	// 		this.setState({
-		// 	// 			bio: data.bio,
-		// 	// 			repos: data.repos
-		// 	// 		})
-		// 	// 	// This bind function allows us to reference the higher level this
-		// 	// 	// and not the "this" in the smaller context function.
-		// 	// 	}.bind(this))
-		// },
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(Query, { onUpdate: this.onUpdate }),
+	      React.createElement(Results, { results: this.state.results })
+	    );
+	  },
 
-		//  searchFunc: function(e){
-		//  	e.preventDefault();
-		//  	var searchData = {};
-		//     var topic = this.refs.topic.value;
-		//     var start = this.refs.start.value;
-		//     var end = this.refs.end.value;
-		//     var searchData = {
-		//     	topic: topic,
-		//     	start: start,
-		//     	end: end
-		//     };
+	  onUpdate: function onUpdate(searchData) {
+	    // alert(searchData.text);
+	    // console.log("onUpdate");
+	    // console.log(searchData);
+	    axios.get('http://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + searchData.text + '&begin_date=' + searchData.begin + '0101&end_date=' + searchData.end + '0101&api-key=9d4a8986921972b65754ea0809d47c84%3A12%3A74623931').then(function (response) {
+	      console.log(response.data.response.docs[1].pub_date);
+	      //Search.update();
+	      //alert("Helper");
+	      // console.log("response");
+	      // console.log(response.data.response.docs);
+	      this.setState({
+	        results: response.data.response.docs
+	      });
 
-		//    helpers.handleSubmit(searchData);
-		//    // var start = this.state.text.trim();
-		//    // var send = this.state.text.trim();
-		//    // 	console.log(searchData);
-		//      return;
-		// },
+	      //this.setState({text: response.data.response.docs[1].pub_date}).bind(this);
+	      console.log(this.state.result);
+	    }.bind(this));
 
-		// updateState: function(){
-		// 	//state =
-		// },
-
-		render: function render() {
-
-			// Return and parenthesis needs to be on same line.
-			/*this.props.children will get replaced by the active component which will be our home component*/
-			/*This is because the "home.js" file is inside of the main component*/
-
-			return React.createElement(
-				'div',
-				null,
-				React.createElement(Query, { onUpdate: this.onUpdate }),
-				React.createElement(Results, { results: this.state.results })
-			);
-		},
-
-		onUpdate: function onUpdate(searchData) {
-			// alert(searchData.text);
-			// console.log("onUpdate");
-			// console.log(searchData);
-			axios.get('http://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + searchData.text + '&begin_date=' + searchData.begin + '0101&end_date=' + searchData.end + '0101&api-key=9d4a8986921972b65754ea0809d47c84%3A12%3A74623931').then(function (response) {
-				console.log(response.data.response.docs[1].pub_date);
-				//Search.update();
-				//alert("Helper");
-				// console.log("response");
-				// console.log(response.data.response.docs);
-				this.setState({
-					results: response.data.response.docs
-				});
-
-				//this.setState({text: response.data.response.docs[1].pub_date}).bind(this);
-				console.log(this.state.result);
-			}.bind(this));
-
-			//console.log("MOUNTED");
-			//console.log(arr);
-		}
+	    //console.log("MOUNTED");
+	    //console.log(arr);
+	  }
 
 	});
 
@@ -24544,11 +24505,18 @@
 	    var savedData = {
 	      title: data.headline.main,
 	      date: data.pub_date,
-	      url: data.web_url
+	      link: data.web_url
 	    };
-	    console.log(savedData);
-	  }
 
+	    var URL = "/articles";
+	    //var currentURL = window.location.origin;
+
+	    $.post(URL, savedData).done(function (data) {
+	      //console.log(data);
+
+	      console.log(savedData);
+	    });
+	  }
 	};
 
 	// We export the helpers function
@@ -25867,232 +25835,113 @@
 /* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var React = __webpack_require__(1);
+	var helpers = __webpack_require__(211);
 
 	// Here we create a component for Saved component
 	var Saved = React.createClass({
-		displayName: "Saved",
+	    displayName: 'Saved',
 
-		render: function render() {
 
-			console.log("Search", this.props.bio);
-			return React.createElement(
-				"div",
-				{ className: "row" },
-				React.createElement(
-					"div",
-					{ className: "col-lg-12" },
-					React.createElement(
-						"div",
-						{ className: "panel panel-primary" },
-						React.createElement(
-							"div",
-							{ className: "panel-heading" },
-							React.createElement(
-								"h1",
-								{ className: "panel-title" },
-								React.createElement(
-									"strong",
-									null,
-									React.createElement("i", { "class": "fa fa-list-alt" }),
-									"  Results"
-								)
-							)
-						),
-						React.createElement(
-							"div",
-							{ className: "panel-body" },
-							React.createElement(
-								"ul",
-								{ className: "list-group" },
-								React.createElement(
-									"li",
-									{ className: "list-group-item" },
-									React.createElement(
-										"h3",
-										null,
-										React.createElement(
-											"span",
-											null,
-											React.createElement(
-												"em",
-												null,
-												"Aliens Invade Paris"
-											)
-										),
-										React.createElement(
-											"span",
-											{ className: "btn-group pull-right" },
-											React.createElement(
-												"button",
-												{ className: "btn btn-default " },
-												"View Article"
-											),
-											React.createElement(
-												"button",
-												{ className: "btn btn-primary" },
-												"Delete"
-											)
-										)
-									),
-									React.createElement(
-										"p",
-										null,
-										"Date Published: 03/15/16"
-									)
-								),
-								React.createElement(
-									"li",
-									{ className: "list-group-item" },
-									React.createElement(
-										"h3",
-										null,
-										React.createElement(
-											"span",
-											null,
-											React.createElement(
-												"em",
-												null,
-												"Obama Gives Commencement Speech"
-											)
-										),
-										React.createElement(
-											"span",
-											{ className: "btn-group pull-right" },
-											React.createElement(
-												"button",
-												{ className: "btn btn-default " },
-												"View Article"
-											),
-											React.createElement(
-												"button",
-												{ className: "btn btn-primary" },
-												"Delete"
-											)
-										)
-									),
-									React.createElement(
-										"p",
-										null,
-										"Date Published: 03/15/16"
-									)
-								),
-								React.createElement(
-									"li",
-									{ className: "list-group-item" },
-									React.createElement(
-										"h3",
-										null,
-										React.createElement(
-											"span",
-											null,
-											React.createElement(
-												"em",
-												null,
-												"AIDS is Cured!"
-											)
-										),
-										React.createElement(
-											"span",
-											{ className: "btn-group pull-right" },
-											React.createElement(
-												"button",
-												{ className: "btn btn-default " },
-												"View Article"
-											),
-											React.createElement(
-												"button",
-												{ className: "btn btn-primary" },
-												"Delete"
-											)
-										)
-									),
-									React.createElement(
-										"p",
-										null,
-										"Date Published: 03/15/16"
-									)
-								),
-								React.createElement(
-									"li",
-									{ className: "list-group-item" },
-									React.createElement(
-										"h3",
-										null,
-										React.createElement(
-											"span",
-											null,
-											React.createElement(
-												"em",
-												null,
-												"Knicks Win Championship"
-											)
-										),
-										React.createElement(
-											"span",
-											{ className: "btn-group pull-right" },
-											React.createElement(
-												"button",
-												{ className: "btn btn-default " },
-												"View Article"
-											),
-											React.createElement(
-												"button",
-												{ className: "btn btn-primary" },
-												"Delete"
-											)
-										)
-									),
-									React.createElement(
-										"p",
-										null,
-										"Date Published: 03/15/16"
-									)
-								),
-								React.createElement(
-									"li",
-									{ className: "list-group-item" },
-									React.createElement(
-										"h3",
-										null,
-										React.createElement(
-											"span",
-											null,
-											React.createElement(
-												"em",
-												null,
-												"Mud: The New Superfood?"
-											)
-										),
-										React.createElement(
-											"span",
-											{ className: "btn-group pull-right" },
-											React.createElement(
-												"button",
-												{ className: "btn btn-default " },
-												"View Article"
-											),
-											React.createElement(
-												"button",
-												{ className: "btn btn-primary" },
-												"Save"
-											)
-										)
-									),
-									React.createElement(
-										"p",
-										null,
-										"Date Published: 03/15/16"
-									)
-								)
-							)
-						)
-					)
-				)
-			);
-		}
+	    getInitialState: function getInitialState() {
+	        return {
+	            saved: []
+	        };
+	    },
+
+	    componentDidMount: function componentDidMount() {
+	        // alert(searchData.text);
+	        // console.log("onUpdate");
+	        // console.log(searchData);
+	        $.ajax({
+	            method: "GET",
+	            url: "/articles/"
+	        }).done(function (data) {
+	            //console.log(data);
+	            console.log("----Get-----");
+	            console.log(data);
+
+	            this.setState({
+	                saved: data
+	            });
+	        }.bind(this));
+
+	        console.log(this.state);
+	    },
+
+	    render: function render() {
+	        var articles = this.state.saved.map(function (result, i) {
+	            return React.createElement(
+	                'li',
+	                { className: 'list-group-item', key: i },
+	                React.createElement(
+	                    'h3',
+	                    null,
+	                    React.createElement(
+	                        'span',
+	                        null,
+	                        React.createElement(
+	                            'em',
+	                            null,
+	                            result.title
+	                        )
+	                    ),
+	                    React.createElement(
+	                        'span',
+	                        { className: 'pull-right' },
+	                        React.createElement(
+	                            'a',
+	                            { href: result.link, target: '_blank' },
+	                            React.createElement(
+	                                'button',
+	                                { className: 'btn btn-default ' },
+	                                'View Article'
+	                            )
+	                        )
+	                    )
+	                ),
+	                React.createElement(
+	                    'p',
+	                    null,
+	                    'Date Published: ',
+	                    result.date
+	                )
+	            );
+	        });
+	        return React.createElement(
+	            'div',
+	            { className: 'col-lg-12' },
+	            React.createElement(
+	                'div',
+	                { className: 'panel panel-primary' },
+	                React.createElement(
+	                    'div',
+	                    { className: 'panel-heading' },
+	                    React.createElement(
+	                        'h1',
+	                        { className: 'panel-title' },
+	                        React.createElement(
+	                            'strong',
+	                            null,
+	                            React.createElement('i', { className: 'fa fa-list-alt' }),
+	                            '  Results'
+	                        )
+	                    )
+	                ),
+	                React.createElement(
+	                    'div',
+	                    { className: 'panel-body' },
+	                    React.createElement(
+	                        'ul',
+	                        { className: 'list-group' },
+	                        articles
+	                    )
+	                )
+	            )
+	        );
+	    }
 	});
 
 	/*We then export the UserProfile component*/

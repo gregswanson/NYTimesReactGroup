@@ -50,15 +50,15 @@ app.post('/articles', function(req, res){
 
 
 
-// app.get('/articles', function(req, res){
-// 	Article.find({}, function(err, doc){
-// 		if (err){
-// 			console.log(err);
-// 		} else {
-// 			res.json(doc);
-// 		}
-// 	});
-// });
+app.get('/articles', function(req, res){
+	Article.find({}, function(err, doc){
+		if (err){
+			console.log(err);
+		} else {
+			res.json(doc);
+		}
+	});
+});
 
 ////////// Get Notes ///////////
 

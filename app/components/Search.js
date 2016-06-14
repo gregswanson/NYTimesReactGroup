@@ -1,6 +1,7 @@
 var React 		= require('react');
 var Query = require('../components/Search/Query');
 var Results = require('../components/Search/Results');
+var Saved = require('../components/Search/Saved');
 var axios = require('axios');
 var helpers = require('../utils/helpers');
 
@@ -15,53 +16,13 @@ var Search = React.createClass({
      		text: '',
  			begin: '',
  			end: '',
- 			results: []
+ 			results: [],
+ 			saved: []
  		};},
 
 
 
-
- // 	update: function(){
- // 		this.setState({
-	// 				text: 'the text has changed'
-		
-	// 	 		})
  	
-	// 	console.log("MOUNTED", helpers.text);
-	// 	// helpers.getGithubInfo(this.props.params.username)
-	// 	// 	.then(function(data){
-	// 	// 		this.setState({
-	// 	// 			bio: data.bio,
-	// 	// 			repos: data.repos
-	// 	// 		})
-	// 	// 	// This bind function allows us to reference the higher level this 
-	// 	// 	// and not the "this" in the smaller context function.
-	// 	// 	}.bind(this))
-	// },
-
-	//  searchFunc: function(e){
-	//  	e.preventDefault();
-	//  	var searchData = {};
-	//     var topic = this.refs.topic.value;
-	//     var start = this.refs.start.value;
-	//     var end = this.refs.end.value;
-	//     var searchData = {
-	//     	topic: topic,
-	//     	start: start,
-	//     	end: end
-	//     };
-
-	 //    helpers.handleSubmit(searchData);
-	 //    // var start = this.state.text.trim();
-	 //    // var send = this.state.text.trim();
-	 //    // 	console.log(searchData);
-	 //      return;
-	 // },
-
-
-     // updateState: function(){
-     // 	//state = 
-     // }, 
 
 	render: function(){
 		
