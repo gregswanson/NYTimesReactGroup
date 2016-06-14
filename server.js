@@ -30,7 +30,7 @@ console.log('Mongoose connection successful.');
 //schemas
 var Article = require('./models/article.js');
 
-routes
+//routes
 app.get('/', function(req, res) {
   res.send(index.html);
 });
@@ -42,63 +42,63 @@ app.get('/', function(req, res) {
 
 
 
-app.get('/articles', function(req, res){
-	Article.find({}, function(err, doc){
-		if (err){
-			console.log(err);
-		} else {
-			res.json(doc);
-		}
-	});
-});
+// app.get('/articles', function(req, res){
+// 	Article.find({}, function(err, doc){
+// 		if (err){
+// 			console.log(err);
+// 		} else {
+// 			res.json(doc);
+// 		}
+// 	});
+// });
 
 ////////// Get Notes ///////////
 
-app.get('/articles/:id', function(req, res){
-	Article.findOne({'_id': req.params.id})
-	.populate('note')
-	.exec(function(err, doc){
-		if (err){
-			console.log(err);
-		} else {
-			res.json(doc);
-		}
-	});
-});
+// app.get('/articles/:id', function(req, res){
+// 	Article.findOne({'_id': req.params.id})
+// 	.populate('note')
+// 	.exec(function(err, doc){
+// 		if (err){
+// 			console.log(err);
+// 		} else {
+// 			res.json(doc);
+// 		}
+// 	});
+// });
 
 
 
-///////////////////////////////
+// ///////////////////////////////
 
-///////remove note //////////
-app.post('/remove/:id', function(req, res){
+// ///////remove note //////////
+// app.post('/remove/:id', function(req, res){
 	
-	Note.find({ '_id': req.params.id }).remove().exec();
+// 	Note.find({ '_id': req.params.id }).remove().exec();
 		
-	});
+// 	});
 
-//////////////////////////////
+// //////////////////////////////
 
 
-app.post('/articles/:id', function(req, res){
-	var newNote = new Note(req.body);
+// app.post('/articles/:id', function(req, res){
+// 	var newNote = new Note(req.body);
 
-	newNote.save(function(err, doc){
-		if(err){
-			console.log(err);
-		} else {
-			Article.findOneAndUpdate({'_id': req.params.id}, {'note':doc._id})
-			.exec(function(err, doc){
-				if (err){
-					console.log(err);
-				} else {
-					res.send(doc);
-				}
-			});
+// 	newNote.save(function(err, doc){
+// 		if(err){
+// 			console.log(err);
+// 		} else {
+// 			Article.findOneAndUpdate({'_id': req.params.id}, {'note':doc._id})
+// 			.exec(function(err, doc){
+// 				if (err){
+// 					console.log(err);
+// 				} else {
+// 					res.send(doc);
+// 				}
+// 			});
 
-		}
-	});
-});
+// 		}
+// 	});
+// });
 
 
 //listen
