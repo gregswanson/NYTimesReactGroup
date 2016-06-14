@@ -1,9 +1,9 @@
 var React = require('react');
 
-// Here we create a component for UserProfile
+// Here we create a component for Saved component
 var Saved = React.createClass({
 	render: function(){
-		// Console.log the bio object
+
 		console.log("Search", this.props.bio)
 		return(
 		<div className="row">

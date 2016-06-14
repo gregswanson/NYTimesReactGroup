@@ -12,8 +12,8 @@ var Search = React.createClass({
 
 	getInitialState: function() {
      return {
-     		topic: '',
- 			start: '',
+     		text: '',
+ 			begin: '',
  			end: '',
  			results: []
  		};},
@@ -78,9 +78,10 @@ var Search = React.createClass({
 	},
 
 	onUpdate: function(searchData){
-		console.log("onUpdate");
-		console.log(searchData);
-		axios.get('http://api.nytimes.com/svc/search/v2/articlesearch.json?q='+ searchData.topic +'&begin_date='+ searchData.start +'0101&end_date='+ searchData.end +'0101&api-key=9d4a8986921972b65754ea0809d47c84%3A12%3A74623931')
+		// alert(searchData.text);
+		// console.log("onUpdate");
+		// console.log(searchData);
+		axios.get('http://api.nytimes.com/svc/search/v2/articlesearch.json?q='+ searchData.text +'&begin_date='+ searchData.begin +'0101&end_date='+ searchData.end +'0101&api-key=9d4a8986921972b65754ea0809d47c84%3A12%3A74623931')
   			.then(function (response) {
     		console.log(response.data.response.docs[1].pub_date);
         //Search.update();
